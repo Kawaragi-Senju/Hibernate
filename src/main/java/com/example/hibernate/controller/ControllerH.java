@@ -1,8 +1,10 @@
 package com.example.hibernate.controller;
 
+import com.example.hibernate.dao.CreditRepository;
 import com.example.hibernate.dao.RepositoryC;
 import com.example.hibernate.dao.RepositoryCreditHistory;
 import com.example.hibernate.dao.RepositoryH;
+import com.example.hibernate.models.Credit;
 import com.example.hibernate.models.CreditHistory;
 import com.example.hibernate.models.Customer;
 import com.example.hibernate.models.Message;
@@ -10,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import java.sql.Date;
+import java.util.List;
 
 @Controller
 public class ControllerH {
@@ -21,6 +24,9 @@ public class ControllerH {
 
     @Autowired
     RepositoryCreditHistory repositoryCreditHistory;
+
+    @Autowired
+    CreditRepository creditRepository;
 
     @GetMapping("/lol")
     public String get(){
@@ -49,6 +55,17 @@ public class ControllerH {
         creditHistory.setClosed(10);
         repositoryCreditHistory.save(creditHistory);
         System.out.println(creditHistory);
+        return "lol";
+    }
+
+    @GetMapping("/acdc")
+    public String get12(){
+        Credit credit = new Credit();
+        Customer customer = new Customer();
+        customer.setName("shd");
+        customer.setCreditList(List.of(credit));
+        credit.setCustomer(customer);
+        creditRepository.save(credit);
         return "lol";
     }
 }

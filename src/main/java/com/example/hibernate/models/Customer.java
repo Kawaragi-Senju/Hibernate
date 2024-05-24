@@ -2,11 +2,13 @@ package com.example.hibernate.models;
 
 import jakarta.persistence.*;
 
+import java.util.List;
+
 @Entity
 @Table(name = "customers")
 public class Customer {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @OneToOne
@@ -18,6 +20,9 @@ public class Customer {
 
     @Column(name="email")
     private String email;
+
+    @OneToMany(mappedBy = "customer")
+    private List<Credit> creditList;
 
     public Customer() {
     }
@@ -44,5 +49,13 @@ public class Customer {
 
     public void setCreditHistory(CreditHistory creditHistory) {
         this.creditHistory = creditHistory;
+    }
+
+    public List<Credit> getCreditList() {
+        return creditList;
+    }
+
+    public void setCreditList(List<Credit> creditList) {
+        this.creditList = creditList;
     }
 }
