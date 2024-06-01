@@ -6,7 +6,7 @@ import jakarta.persistence.*;
 @Table(name = "credits")
 public class Credit {
 
-    Boolean closed;
+    private Boolean closed;
 
     @ManyToOne()
     @JoinColumn(name = "customers_id")

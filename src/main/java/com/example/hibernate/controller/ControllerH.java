@@ -8,10 +8,12 @@ import com.example.hibernate.models.Credit;
 import com.example.hibernate.models.CreditHistory;
 import com.example.hibernate.models.Customer;
 import com.example.hibernate.models.Message;
+import org.hibernate.annotations.Cascade;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -62,10 +64,26 @@ public class ControllerH {
     public String get12(){
         Credit credit = new Credit();
         Customer customer = new Customer();
-        customer.setName("shd");
+        customer.setName("sqwer");
+        credit.setClosed(true);
         customer.setCreditList(List.of(credit));
         credit.setCustomer(customer);
-        creditRepository.save(credit);
+        repositoryC.save(customer);
+        return "lol";
+    }
+
+    @GetMapping("/123")
+    public String get123(){
+        Credit credit = new Credit();
+        Customer customer= new Customer();
+        ArrayList<Credit> arcredit = new ArrayList<>();
+        arcredit.add(credit);
+        customer.setName("qwerty123");
+        //credit.setClosed(false);
+        repositoryC.delete(customer);
+        customer.setCreditList(arcredit);
+        repositoryC.save(customer);
+        //creditRepository.save(credit);
         return "lol";
     }
 }
