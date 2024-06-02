@@ -15,6 +15,14 @@ public class Customer {
     @JoinColumn(name = "credit_history_id", referencedColumnName = "id")
     private CreditHistory creditHistory;
 
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(
+            name = "customers_projects",
+            joinColumns = {@JoinColumn(name="custromers_id",referencedColumnName="id")},
+            inverseJoinColumns = {@JoinColumn( name = "projects_id", referencedColumnName = "id")}
+    )
+    List<Project> projectList;
+
     @Column(name="name")
     private String name;
 
